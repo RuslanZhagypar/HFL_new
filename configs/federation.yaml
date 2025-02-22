@@ -1,0 +1,6 @@
+federation:
+  num_users: 50
+  num_groups: 10
+  group_freq: 1 # number of group period before global aggregation, G/I
+  local_period: 2 # length of local period I
+  interval: 1 # interval to evaluate the global model

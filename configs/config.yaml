@@ -1,0 +1,22 @@
+# configs/config.yaml
+defaults:
+  - dataset
+  - model
+  - federation  # Referencing federation.yaml
+  - uav_scenarios: case1  # Change this to case2, case3, etc.
+
+algorithm: proposedHFL # proposedHFL or convHFL
+experiment_name: federated_learning
+seed: 55
+device: cuda
+global_epochs: 500 #rounds of training
+noOfExperiments: 1
+system:
+  num_workers: 4  # Number of worker threads for data loading
+  verbose: false  # Enable detailed logging
+
+optimization:
+  lr: 0.01  # Learning rate for local updates
+  momentum: 0  # Momentum for SGD optimizer
+  local_bs: 64  # Local batch size
+  test_bs: 768

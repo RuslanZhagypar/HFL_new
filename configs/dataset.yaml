@@ -1,0 +1,5 @@
+dataset:
+  name: mnist
+  data_dir: data/  # Ensure this directory exists
+  # num_users: 10
+  iid: false

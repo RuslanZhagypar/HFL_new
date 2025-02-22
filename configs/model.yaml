@@ -1,0 +1,4 @@
+model:
+  name: mlp  # Choose between 'cnn' or 'mlp'
+  hidden_dim: 300
+  num_classes: 10
