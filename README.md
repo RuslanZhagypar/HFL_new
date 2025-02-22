@@ -1,9 +1,9 @@
-# **[Paper Title]**  
-Implementation of the code from the paper "[Paper Title]"  
-[Link to Paper (if available)]  
+# **UAV-assisted Unbiased Hierarchical Federated Learning: Performance and Convergence Analysis**  
+Implementation of the code from the paper "[UAV-assisted Unbiased Hierarchical Federated Learning: Performance and Convergence Analysis"  
+[Link]  
 
 ## **Description**
-This repository contains the code implementation for the paper **"[Paper Title]"**. The purpose of this code is to reproduce the results and experiments described in the paper. The model, dataset, and experiments are implemented using **[insert technology stack here, e.g., PyTorch, TensorFlow, etc.]**.
+The purpose of this code is to reproduce the results and experiments described in the paper. The model, dataset, and experiments are implemented using **[insert technology stack here, e.g., PyTorch, TensorFlow, etc.]**.
 
 ## **Getting Started**
 
