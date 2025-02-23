@@ -15,7 +15,7 @@ n0Squared = 4.14e-6;     % Noise power
 
 % Resource Blocks (RBs)
 RBs = 5;
-activeProb = (N / RBs) / N;  % Probability of UAVs being active
+activeProb =  floor((N+1)/RBs - 1);  % Probability of UAVs being active
 
 % LOS Probability Model
 a = 9.61;
@@ -26,7 +26,7 @@ taudB = (-20:2:10)';
 tau = 10.^(taudB ./ 10);
 
 diskArea = pi * radiusCluster^2;
-nbit = 90000;            % Number of simulation iterations
+nbit = 10000;            % Number of simulation iterations
 nsir = zeros(length(tau), 1); % Coverage probability counter
 valid_n = 0;             % Counter for valid simulations
 
@@ -85,8 +85,8 @@ for n = 1:nbit
     yyUAV(end) = [];
 
     % Randomly activate interfering UAVs
-    randomArray = rand(N-1, 1);
-    indices = find(randomArray <= activeProb);
+    availableUAVs = 1:N; % Devices excluding the current UAV
+    indices = randsample(availableUAVs, activeProb);
 
     ial = intersect(indices, ial);
     ian = intersect(indices, ian);
@@ -125,3 +125,5 @@ xlabel('SINR Threshold, \theta', 'FontSize', 12);
 ylabel('Coverage Probability', 'FontSize', 12);
 grid on;
 legend show;
+
+plot(taudB,[0.467356, 0.467336, 0.467243, 0.466861, 0.465538, 0.461778, 0.453137, 0.436953, 0.411626, 0.377417, 0.335911, 0.286558, 0.221268, 0.134082, 0.051153, 0.00944879])
