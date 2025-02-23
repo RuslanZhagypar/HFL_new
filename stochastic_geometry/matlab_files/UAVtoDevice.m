@@ -3,8 +3,8 @@ clc; clear; close all;
 %% ======================== Simulation Parameters ========================= %%
 radiusCluster = 500;      % Radius of cluster disk (for daughter points)
 H_UAV = 120;             % UAV altitude
-N = 9;                   % Number of UAVs
-N_devs = 49;             % Number of devices
+N = 9;                   % Number of UAVs - 1 (-1 is needed for interference comp.)
+N_devs = 49;             % Number of devices - 1 
 
 % Channel Parameters
 mL = 4;                  % LOS Nakagami-m parameter
@@ -17,11 +17,12 @@ n0Squared = 4.14e-6;     % Noise power
 
 % Resource Blocks (RBs)
 RB_uav = 5;
-RB_devs = 10;
+RB_devs = 15;
 
-% Activation probabilities
-activeProb_uav = (N / RB_uav) / N;  % Probability of UAVs being active
-activeProb_devs = (N_devs / RB_devs) / N_devs;
+
+activeProb_uav = floor((N+1)/RB_uav - 1);
+activeProb_devs = floor((N_devs+1)/RB_devs - 1);
+
 
 % LOS Probability Model
 a = 9.61;
@@ -35,8 +36,6 @@ diskArea = pi * radiusCluster^2;
 nbit = 10000;            % Number of simulation iterations
 nsir = zeros(length(tau), 1); % Coverage probability counter
 
-valid_n = 0;
-
 %% ===================== Monte Carlo Simulation ========================= %%
 for n = 1:nbit
     fprintf("Simulation Iteration: %d\n", n);
@@ -48,7 +47,7 @@ for n = 1:nbit
     yyUAV = r .* sin(t);
     zzUAV = H_UAV + 0 * t;
 
-    % Chosen UAV for communication y_0
+    % Chosen UAV for communication y_0 (CHANGE THIS WHEN NEEDED)
     xx_chosenUAV = 30;
     yy_chosenUAV = 282;
 
@@ -62,11 +61,11 @@ for n = 1:nbit
     yyDevices = r .* sin(t);
 
     % Remove one random device (to simulate a typical user)
-    inx = randi([1 N]);  
+    inx = randi([1 N_devs]);  
     xxDevices(inx) = [];
     yyDevices(inx) = [];
 
-    % Chosen UE for communication x_0
+    % Chosen UE for communication x_0 (CHANGE THIS WHEN NEEDED)
     xx_chosenUE = -162;
     yy_chosenUE = 362;
 
@@ -102,9 +101,8 @@ for n = 1:nbit
     end
 
     %% ================== Downlink Interference Calculation =================== %%
-    randomArray = rand(N-1,1);
-    indices = find(randomArray<=activeProb_uav);
-    % indices = randi([1, N]);  
+    availableUAVs = 1:N; % Devices excluding the current UAV
+    indices = randsample(availableUAVs, activeProb_uav);
     ial = intersect(indices, ial);
     ian = intersect(indices, ian);
 
@@ -131,10 +129,9 @@ for n = 1:nbit
     ial2 = find(pa2 == 1);
     ian2 = find(pa2 == 0);
 
-    indices2 = find(rand(N_devs, 1) <= activeProb_devs);
-    if length(indices2) > 4
-        indices2 = indices2(1:4);
-    end
+    availableDevs = 1:N_devs; % Devices excluding the current device
+    indices2 = randsample(availableDevs, activeProb_devs);
+
     ial2 = intersect(indices2, ial2);
     ian2 = intersect(indices2, ian2);
 
@@ -162,7 +159,12 @@ end
 
 Pc_simul = nsir ./ nbit;
 figure;
+hold on 
 plot(taudB, Pc_simul, 'x', 'LineWidth', 1.5, 'MarkerSize', 8);
 xlabel('SINR Threshold, \theta');
 ylabel('Coverage Probability');
 grid on;
+
+%% Compute the values from the mathematica file and put them into 'mathematica_values'
+mathematica_values = [0.730396, 0.730375, 0.730268, 0.729778, 0.727847, 0.721505, 0.704695, 0.669229, 0.60903, 0.524202, 0.420444, 0.303693, 0.178894, 0.0687328, 0.0119322, 0.000571077];
+plot(taudB, mathematica_values)
