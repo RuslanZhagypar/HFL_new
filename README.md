@@ -37,9 +37,14 @@ You can install the necessary libraries using `pip`:
 pip install -r requirements.txt
 ```
 
+## Third party library
+This project uses code from the repository [Hierarchical-SGD](https://github.com/C3atUofU/Hierarchical-SGD) by Mingyue Ji. We acknowledge their work and thank them for providing the resources under MIT License.
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
 
 
 
