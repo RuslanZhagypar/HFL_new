@@ -19,9 +19,10 @@ A user can use Mathematica or/and Matlab files to generate new probabilities for
 
 ### **Prerequisites**
 Before running the code, ensure that you have the following dependencies installed:
-- **Python** (version 3.x or higher)
-- **PyTorch** (or other frameworks used in the paper, e.g., TensorFlow, etc.)
-- Other dependencies listed below
+- **Python** (version Python 3.10 or higher)
+- **PyTorch=2.4.1**
+- **CUDA version 12.4** 
+- Other dependencies listed in the requirements.txt file
 
 You can install the necessary libraries using `pip`:
 
