@@ -1,6 +1,6 @@
 # **UAV-assisted Unbiased Hierarchical Federated Learning: Performance and Convergence Analysis**  
-Implementation of the code from the paper "[UAV-assisted Unbiased Hierarchical Federated Learning: Performance and Convergence Analysis"  
-[Link]  
+Implementation of the code from the paper "[UAV-assisted Unbiased Hierarchical Federated Learning: Performance and Convergence Analysis](Link)"
+
 
 ## **Description**
 The purpose of this code is to reproduce the results and experiments described in the paper. The dataset is MNIST, and the model is MLP. However, these can be changed if needed. The repository contains python files for model training and Matlab and Mathematica files for stochastic geometry calculations. The project uses _Hydra_ package for the ease of conducting experiements. 
@@ -33,7 +33,13 @@ Before running the code, ensure that you have the following dependencies install
 
 You can install the necessary libraries using `pip`:
 
-```bash
+```
 pip install -r requirements.txt
+```
 
-format it properly for github readme file
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+
