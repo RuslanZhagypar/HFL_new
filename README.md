@@ -8,8 +8,12 @@ The purpose of this code is to reproduce the results and experiments described i
 ## **Getting Started**
 To run the training, a user can look up the _.configs_ files to check the parameter values. Then, a user can execute: 
 _python -m src.main_ 
-The parameter values can be changed directly in the _configs.py_ file, or on the command line, e.g.:
-_python -m src.main algorithm=new_algorithm_
+The parameter values can be changed directly in the _config.yaml_ file, or on the command line, e.g.:
+_python -m src.main algorithm=convHFL uav_scenarios=case2_
+
+A user can use Mathematica or/and Matlab files to generate new probabilities for a different system parameter values. The obtained probability values are then used to create _case_2.yaml, case_3.yaml,..._ configuration files. Then different cases can be chosen in the _config.yaml_ file.
+
+
 
 
 
